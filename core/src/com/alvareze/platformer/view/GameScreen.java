@@ -26,6 +26,8 @@ public class GameScreen implements Screen {
         //setting the camera on the renderer
         renderer.render();
         //renderer the render
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        //sets camera position so we could see the whole screen
     }
 
     @Override
