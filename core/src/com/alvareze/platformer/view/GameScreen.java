@@ -16,6 +16,8 @@ public class GameScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
         camera = new OrthographicCamera(14f, 14f);
         //telling how much to show on the screen when you run it
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        //sets camera position so we could see the whole screen
     }
 
     @Override
@@ -26,8 +28,6 @@ public class GameScreen implements Screen {
         //setting the camera on the renderer
         renderer.render();
         //renderer the render
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        //sets camera position so we could see the whole screen
     }
 
     @Override
