@@ -2,6 +2,7 @@ package com.alvareze.platformer.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -27,6 +28,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+      //set the color
+      Gdx.gl.glClearColor(0.30f,0.80f, 0.80f, 1f);
+      Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+      //clears the color to the one we chose
+
         //updating the camera
         camera.update();
         renderer.setView(camera);
@@ -37,6 +43,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        //setting the width of the camera again
+        camera.viewportWidth = 14f;
+        camera.viewportHeight = 14f * height / width;
+        //modify the height so it doesn't look stretchy
+        camera.update();
 
     }
 
