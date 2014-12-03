@@ -1,9 +1,11 @@
 package com.alvareze.platformer.view;
 
+import com.alvareze.platformer.model.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -12,6 +14,9 @@ public class GameScreen implements Screen {
    public TiledMap map;
     public OrthogonalTiledMapRenderer renderer;
     public OrthographicCamera camera;
+
+    public SpriteBatch spriteBatch;
+    public Player player;
 
     public GameScreen() {
         map = new TmxMapLoader().load("map/map1.tmx");
@@ -24,6 +29,9 @@ public class GameScreen implements Screen {
         //telling how much to show on the screen when you run it
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         //sets camera position so we could see the whole screen
+
+        spriteBatch = new SpriteBatch();
+        player = new Player();
     }
 
     @Override
@@ -39,6 +47,9 @@ public class GameScreen implements Screen {
         //setting the camera on the renderer
         renderer.render();
         //renderer the render
+        spriteBatch.begin();
+        player.draw(spriteBatch); //drawing the player
+        spriteBatch.end();
     }
 
     @Override
