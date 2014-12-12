@@ -16,10 +16,11 @@ public class Player {
     public Player() {
         position = new Vector2(0, 3);
         //initializing the position of the player (bottom left corner)
-        spriteSheet = new Spritesheet("img/aliens.png");
-        animation = spriteSheet.createAnimation();
+        spriteSheet = new Spritesheet("img/aliens.png", 70, 100);
+        animation = spriteSheet.createAnimation(9, 10, 0.1f);
         //greg says this code takes me to mexico
         // im kidding it returns an animation ^^
+        animation = spriteSheet.flipAnimation(animation, true, false);
         stateTime = 0f;
     }
     public void draw(Batch spriteBatch){

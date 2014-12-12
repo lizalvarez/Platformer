@@ -9,13 +9,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Spritesheet {
     public Texture spriteSheet;
     public TextureRegion[] spriteFrames;
-    public Animation animation;
 
 
-    public Spritesheet(String pathToFile) {
+    public Spritesheet(String pathToFile, int width, int height){
         spriteSheet = new Texture(Gdx.files.internal(pathToFile));
         //accessing aliens and converting it into a texture
-        TextureRegion[][] spriteSheetFrames = TextureRegion.split(spriteSheet, 70, 100);
+        TextureRegion[][] spriteSheetFrames = TextureRegion.split(spriteSheet, width, height);
         //splits up sprite sheet according to width and height to make it into 2d array
         int counter = 0;
         for (int row = 0; row < spriteSheetFrames.length; row++) {
@@ -39,14 +38,29 @@ public class Spritesheet {
 
         }
     }
+    public Animation createAnimation(int startFrame, int lastFrame, float animationSpeed){
+        //taking starting frame and last frame
+        int counter = (lastFrame + 1) - startFrame;
+        TextureRegion[] animationFrames = new TextureRegion[counter];
+        //create the space for animation frame
+        for(int index = lastFrame; index>= startFrame; index--){
+            animationFrames[--counter] = spriteFrames[index];
+        }
 
-    public Animation createAnimation(){
-        TextureRegion[] animationFrames = new TextureRegion[2];
-        //create the space for animation frame, space for 2 frames
-        animationFrames[0] = spriteFrames[1];
-        animationFrames[1] = spriteFrames[2];
-        animation = new Animation(1f, animationFrames);
-        return animation;
+        return new Animation(animationSpeed, animationFrames);
+        //every animation is one frame per
+        //return animation variable
 
+    }
+    //animation that's flipped
+    public Animation flipAnimation(Animation originalAnimation, boolean flipX, boolean flipY){
+        int frameCount = originalAnimation.getKeyFrames().length;
+        TextureRegion[] flippedFrames = new TextureRegion[frameCount];
+        //access each space in animation
+        for(int index = 0; index <= frameCount -1; index++){
+            flippedFrames[index] = new TextureRegion(originalAnimation.getKeyFrames()[index]);
+            flippedFrames[index].flip(flipX, flipY);
+        }
+        return new Animation(originalAnimation.getFrameDuration(), flippedFrames);
     }
 }

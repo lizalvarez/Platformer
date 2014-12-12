@@ -49,6 +49,9 @@ public class GameScreen implements Screen {
         //setting the camera on the renderer
         renderer.render();
         //renderer the render
+
+        player.update(delta);
+
         spriteBatch.begin();  //beginning of commands for player
         player.draw(spriteBatch); //drawing the player
         spriteBatch.end(); //ending of all the commands for the player
