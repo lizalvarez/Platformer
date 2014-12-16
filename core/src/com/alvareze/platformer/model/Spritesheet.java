@@ -55,11 +55,13 @@ public class Spritesheet {
     //animation that's flipped
     public Animation flipAnimation(Animation originalAnimation, boolean flipX, boolean flipY){
         int frameCount = originalAnimation.getKeyFrames().length;
+        //how long the frames take
         TextureRegion[] flippedFrames = new TextureRegion[frameCount];
         //access each space in animation
         for(int index = 0; index <= frameCount -1; index++){
             flippedFrames[index] = new TextureRegion(originalAnimation.getKeyFrames()[index]);
             flippedFrames[index].flip(flipX, flipY);
+            //flipped the player
         }
         return new Animation(originalAnimation.getFrameDuration(), flippedFrames);
     }
