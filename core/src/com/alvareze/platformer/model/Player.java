@@ -1,15 +1,23 @@
 package com.alvareze.platformer.model;
 
+import com.alvareze.platformer.view.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.HashMap;
 
 public class Player {
     public Vector2 position;
     //point for x and y positioning
+    public int width;
+    public int height;
     public Spritesheet spriteSheet;
     public String currentAnimation;
 
@@ -21,9 +29,30 @@ public class Player {
     public Player() {
         position = new Vector2(0, 3);
         //initializing the position of the player (bottom left corner)
-        spriteSheet = new Spritesheet("img/aliens.png", 70, 100);
+        width = 70;
+        height = 100;
+        spriteSheet = new Spritesheet("img/aliens.png", width, height);
         animations = new HashMap<String, Animation>();
-//don"t flip: stand, climb. need to be flipped: duck, hurt, idle, jump, swim, walk
+
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        bodyDefinition.position.set(position);
+            //creating that body in the game world
+        Body playerBody = GameScreen.gameWorld.createBody(bodyDefinition);
+        playerBody.setUserData(this);
+        //this = whole player class
+        //attaching it to a specific body
+
+        PolygonShape rectangleShape = new PolygonShape();
+        rectangleShape.setAsBox(width / 2f, height / 2f, new Vector2(width / 2f, height / 2f), 0f );
+        //creating shape
+        FixtureDef fixtureDefinition = new FixtureDef();
+        fixtureDefinition.shape = rectangleShape;
+
+        playerBody.createFixture(fixtureDefinition);
+        rectangleShape.dispose();
+
+//don't flip: stand, climb. need to be flipped: duck, hurt, idle, jump, swim, walk
         animations.put("stand", spriteSheet.createAnimation(0, 0, 0.1f));
         animations.put("climb", spriteSheet.createAnimation(1, 1, 0.1f));
         animations.put("duck", spriteSheet.createAnimation(3, 3, 0.1f));
@@ -53,6 +82,5 @@ public class Player {
 
         //delta time determines the change in time
         stateTime += deltaTime;
-        position.x +=  deltaTime;
     }
 }

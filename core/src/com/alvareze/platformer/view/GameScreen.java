@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class GameScreen implements Screen {
    public TiledMap map;
@@ -19,9 +22,14 @@ public class GameScreen implements Screen {
     public Batch spriteBatch;
     public Player player;
 
-    public GameScreen() {
+    public static World gameWorld;
+    private Box2DDebugRenderer debugRenderer;
+
+      public GameScreen() {
         map = new TmxMapLoader().load("map/map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
+        gameWorld = new World(new Vector2(0, -10), true);
+        debugRenderer = new Box2DDebugRenderer();
 
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
@@ -55,6 +63,9 @@ public class GameScreen implements Screen {
         spriteBatch.begin();  //beginning of commands for player
         player.draw(spriteBatch); //drawing the player
         spriteBatch.end(); //ending of all the commands for the player
+
+        debugRenderer.render(gameWorld, camera.combined);
+        //displays the shapes to the exact size it needs to be
     }
 
     @Override
