@@ -2,6 +2,7 @@ package com.alvareze.platformer.view;
 
 import com.alvareze.platformer.controller.CameraController;
 import com.alvareze.platformer.controller.LevelController;
+import com.alvareze.platformer.controller.PlayerController;
 import com.alvareze.platformer.model.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -22,13 +23,10 @@ import javafx.scene.Camera;
 
 public class GameScreen implements Screen {
 
-    public Player player;
-
       public GameScreen() {
         LevelController.initializeController();
           CameraController.initializeController();
-
-        player = new Player(70, 100);
+          PlayerController.initializeController();
     }
 
     @Override
@@ -40,8 +38,7 @@ public class GameScreen implements Screen {
 
         LevelController.update(delta);
         CameraController.update();
-
-        player.update(delta);
+        PlayerController.update(delta);
         LevelController.draw();
         //drawing what ever is on the level
 

@@ -1,5 +1,6 @@
 package com.alvareze.platformer.model;
 
+import com.alvareze.platformer.controller.LevelController;
 import com.alvareze.platformer.view.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,32 +14,16 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.HashMap;
 
-public class Player {
-    public Vector2 position;
-    //point for x and y positioning
-    public float width;
-    public float height;
-    public Spritesheet spriteSheet;
-    public String currentAnimation;
+public class Player extends Sprite {
 
-    private float stateTime;
-    //the game time of the player, when he spawns
-    private HashMap<String, Animation> animations;
-    // a table
-
-    public Player(int width, int height) {
-        position = new Vector2(0, 3);
-        //initializing the position of the player (bottom left corner)
-        this.width = width * (1/70f);
-        this.height = height * (1/70f);
-        spriteSheet = new Spritesheet("img/aliens.png", width, height);
-        animations = new HashMap<String, Animation>();
+    public Player(Vector2 position, int width, int height) {
+        super(position, width, height);
 
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         bodyDefinition.position.set(position);
             //creating that body in the game world
-        Body playerBody = GameScreen.gameWorld.createBody(bodyDefinition);
+        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
         playerBody.setUserData(this);
         //this = whole player class
         //attaching it to a specific body
@@ -72,15 +57,14 @@ public class Player {
 
         currentAnimation = "walkLeft";
 
-        stateTime = 0f;
     }
     public void draw(Batch spriteBatch){
-        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width, height);
-        //size and position of the player & gets him to walk
+        super.draw(spriteBatch);
+        //calling the parent
+
     }
     public void update(float deltaTime){
+        super.update(deltaTime);
 
-        //delta time determines the change in time
-        stateTime += deltaTime;
     }
 }
