@@ -23,8 +23,8 @@ public class Player extends Sprite {
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         bodyDefinition.position.set(position);
             //creating that body in the game world
-        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
-        playerBody.setUserData(this);
+        physicsBody = LevelController.gameWorld.createBody(bodyDefinition);
+        physicsBody.setUserData(this);
         //this = whole player class
         //attaching it to a specific body
 
@@ -34,7 +34,7 @@ public class Player extends Sprite {
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
 
-        playerBody.createFixture(fixtureDefinition);
+        physicsBody.createFixture(fixtureDefinition);
         rectangleShape.dispose();
 
 //don't flip: stand, climb. need to be flipped: duck, hurt, idle, jump, swim, walk

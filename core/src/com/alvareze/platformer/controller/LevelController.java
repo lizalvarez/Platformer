@@ -2,6 +2,7 @@ package com.alvareze.platformer.controller;
 
 import com.alvareze.platformer.model.Level;
 import com.alvareze.platformer.model.Player;
+import com.alvareze.platformer.model.Sprite;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -30,7 +31,7 @@ public class LevelController {
     public static void initializeController(){
         level = new Level("map/map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        gameWorld = new World(new Vector2(0, -10), true);
+        gameWorld = new World(new Vector2(0,0), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
@@ -63,9 +64,10 @@ public class LevelController {
         gameWorld.getBodies(worldBodies);
         //access every body in worldBodies
         for(Body body: worldBodies){
-            Player playerBody = (Player)body.getUserData();
+
+            Sprite spriteBody = (Sprite)body.getUserData();
             //changing the type of variable
-            playerBody.position = body.getPosition();
+            spriteBody.position = body.getPosition();
             //does all the work
         }
     }
