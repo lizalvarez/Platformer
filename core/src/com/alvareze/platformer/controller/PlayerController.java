@@ -17,7 +17,7 @@ public class PlayerController {
     private static final float MAX_VELOCITY = 5f;
 
     public static void initializeController(){
-        player = new Player(new Vector2(4, 4), 70, 100);
+        player = new Player(new Vector2(4, 6), 70, 100,"img/aliens.png");
     }
 
     public static void update(float deltaTime) {
@@ -39,6 +39,15 @@ public class PlayerController {
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
           player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            player.physicsBody.applyLinearImpulse(VELOCITY, 1f, position.x, position.y, true);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            player.physicsBody.applyLinearImpulse(-VELOCITY, -1f, position.x, position.y, true);
         }
     }
 }

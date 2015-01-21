@@ -1,9 +1,12 @@
 package com.alvareze.platformer.controller;
 
+import com.alvareze.platformer.model.Bodies;
 import com.alvareze.platformer.model.Level;
 import com.alvareze.platformer.model.Player;
 import com.alvareze.platformer.model.Sprite;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -31,12 +34,14 @@ public class LevelController {
     public static void initializeController(){
         level = new Level("map/map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        gameWorld = new World(new Vector2(0,0), true);
+        gameWorld = new World(new Vector2(0,-10), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = renderer.getSpriteBatch();
         //the spritebatch that's attached to the map
+
+        createLevelBodies();
 
     }
     //void = no return type
@@ -56,7 +61,7 @@ public class LevelController {
         //renderer the render
         updateWorldBodies();
         gameWorld.step(1/60f, 1, 1);
-        //updating our game world\
+        //updating our game world
     }
     private static void updateWorldBodies(){
         worldBodies.clear();
@@ -67,8 +72,19 @@ public class LevelController {
 
             Sprite spriteBody = (Sprite)body.getUserData();
             //changing the type of variable
-            spriteBody.position = body.getPosition();
-            //does all the work
+
+            if(spriteBody != null) {
+                spriteBody.position = body.getPosition();
+                //does all the work
+            }
+        }
+    }
+    private static void createLevelBodies(){
+        MapObjects mapObjects = level.getLayerObjects(level.getMapLayer("collision"));
+
+        for(MapObject mapObject : mapObjects){
+            Bodies.createBody(mapObject);
+
         }
     }
 }
