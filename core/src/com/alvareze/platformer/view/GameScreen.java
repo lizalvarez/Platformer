@@ -1,6 +1,7 @@
 package com.alvareze.platformer.view;
 
 import com.alvareze.platformer.controller.CameraController;
+import com.alvareze.platformer.controller.InputController;
 import com.alvareze.platformer.controller.LevelController;
 import com.alvareze.platformer.controller.PlayerController;
 import com.alvareze.platformer.model.Player;
@@ -27,6 +28,7 @@ public class GameScreen implements Screen {
         LevelController.initializeController();
           CameraController.initializeController();
           PlayerController.initializeController();
+          InputController.initializeController();
     }
 
     @Override
