@@ -37,13 +37,15 @@ public class InputController {
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-               System.out.println("X: " + screenX + ", Y: " + screenY);
+                if(left.getBoundingBox().contains(screenX, Gdx.graphics.getHeight() - screenY)) {
+                    PlayerController.movementAction = "right";
+                }
                 return true;
             }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                System.out.println("X: " + screenX + ", Y: " + screenY);
+                PlayerController.movementAction = "";
                 return true;
             }
         };

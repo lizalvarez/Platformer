@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerController {
 
     public static Player player;
+    public static String movementAction;
+    public static String specialAction;
 
     private static final float VELOCITY = 1f;
     // wont be able to be changed once it's set
@@ -18,6 +20,8 @@ public class PlayerController {
 
     public static void initializeController(){
         player = new Player(new Vector2(4, 6), 70, 100,"img/aliens.png");
+        movementAction = "";
+        specialAction = "";
     }
 
     public static void update(float deltaTime) {
@@ -37,16 +41,16 @@ public class PlayerController {
             player.physicsBody.setLinearVelocity(velocity.x, velocity.y);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if(movementAction.equalsIgnoreCase("right")){
           player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if(movementAction.equalsIgnoreCase("left")) {
             player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        if(movementAction.equalsIgnoreCase("up")) {
             player.physicsBody.applyLinearImpulse(VELOCITY, 1f, position.x, position.y, true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        if(movementAction.equalsIgnoreCase("right")) {
             player.physicsBody.applyLinearImpulse(-VELOCITY, -1f, position.x, position.y, true);
         }
     }

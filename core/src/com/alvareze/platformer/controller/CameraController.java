@@ -7,6 +7,9 @@ public class CameraController {
     public static OrthographicCamera camera;
     public static OrthographicCamera inputCamera;
 
+    public static float widthScale;
+    public static float heightScale;
+
     public static void initializeController(){
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
@@ -34,6 +37,9 @@ public class CameraController {
         inputCamera.viewportHeight = 14f * height / width;
         inputCamera.position.set(inputCamera.viewportWidth / 2f, inputCamera.viewportHeight / 2f, 0);
         inputCamera.update();
+
+        widthScale = width / inputCamera.viewportWidth * LevelController.UNIT_SCALE;
+        heightScale = height / inputCamera.viewportHeight * LevelController.UNIT_SCALE;
     }
 }
 
