@@ -10,16 +10,18 @@ import com.badlogic.gdx.math.Vector2;
 
 public class InputController {
     private static Spritesheet spritesheet;
+    private static InputControl right;
     private static InputControl left;
+
 
     public static void initializeController(){
         spritesheet = new Spritesheet("img/touch-controls.png", 80, 80);
-        left = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[0], "left");
+        right = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[1], "right");
         Gdx.input.setInputProcessor(createInputAdapter());
     }
     public static void draw (Batch spriteBatch) {
         spriteBatch.begin();
-        left.draw(spriteBatch);
+        right.draw(spriteBatch);
         spriteBatch.end();
     }
 
@@ -37,9 +39,9 @@ public class InputController {
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                if(left.getBoundingBox().contains(screenX, Gdx.graphics.getHeight() - screenY)) {
+                if(right.getBoundingBox().contains(screenX, Gdx.graphics.getHeight() - screenY)) {
                     PlayerController.movementAction = "right";
-                }
+                 }
                 return true;
             }
 

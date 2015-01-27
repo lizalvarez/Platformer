@@ -44,14 +44,9 @@ public class PlayerController {
         if(movementAction.equalsIgnoreCase("right")){
           player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
         }
-        if(movementAction.equalsIgnoreCase("left")) {
+        else if(movementAction.equalsIgnoreCase("left")) {
             player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
         }
-        if(movementAction.equalsIgnoreCase("up")) {
-            player.physicsBody.applyLinearImpulse(VELOCITY, 1f, position.x, position.y, true);
-        }
-        if(movementAction.equalsIgnoreCase("right")) {
-            player.physicsBody.applyLinearImpulse(-VELOCITY, -1f, position.x, position.y, true);
-        }
+
     }
 }

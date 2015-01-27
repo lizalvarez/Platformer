@@ -1,5 +1,6 @@
 package com.alvareze.platformer.model;
 
+import com.alvareze.platformer.controller.CameraController;
 import com.alvareze.platformer.controller.LevelController;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -26,6 +27,9 @@ public class InputControl {
         spriteBatch.draw(textureRegion, position.x, position.y, width * LevelController.UNIT_SCALE, height * LevelController.UNIT_SCALE);
     }
     public Rectangle getBoundingBox(){
-        return new Rectangle(position.x, position.y, width, height);
+        return new Rectangle(position.x / LevelController.UNIT_SCALE * CameraController.widthScale,
+                position.y / LevelController.UNIT_SCALE * CameraController.heightScale,
+                width * CameraController.widthScale,
+                height * CameraController.heightScale);
     }
 }
