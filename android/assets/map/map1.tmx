@@ -9,6 +9,9 @@
   </data>
  </layer>
  <objectgroup color="#ff0000" name="collision" width="20" height="10">
-  <object name="ground" type="solid" x="139" y="564" width="484" height="135"/>
+  <object name="ground" type="solid" x="131" y="564" width="484" height="135"/>
+  <object x="4" y="626">
+   <polyline points="0,0 134,0 136,-64 622,-66 624,-4 1396,0 1398,-628 -4,-626 -4,4 66,4 136,4"/>
+  </object>
  </objectgroup>
 </map>
