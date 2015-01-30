@@ -54,7 +54,7 @@ public class LevelController {
         spriteBatch.setProjectionMatrix(CameraController.inputCamera.combined);
         InputController.draw(spriteBatch);
 
-        debugRenderer.render(gameWorld, CameraController.camera.combined);
+        //debugRenderer.render(gameWorld, CameraController.camera.combined);
         //displays the shapes to the exact size it needs to be
 
     }
@@ -90,5 +90,13 @@ public class LevelController {
             Bodies.createBody(mapObject);
 
         }
+
+        mapObjects = level.getLayerObjects(level.getMapLayer("blocks"));
+
+        for(MapObject mapObject : mapObjects){
+            Bodies.createBody(mapObject);
+
+        }
+
     }
 }

@@ -12,6 +12,12 @@ public class PlayerController {
     public static Player player;
     public static String movementAction;
     public static String specialAction;
+    public static boolean grounded;
+
+    private enum State{
+        Idle, Walk, Jump, Duck, Climb, Hurt, Swim
+    }
+    private static State playerState;
 
     private static final float VELOCITY = 1f;
     // wont be able to be changed once it's set
@@ -20,8 +26,11 @@ public class PlayerController {
 
     public static void initializeController(){
         player = new Player(new Vector2(4, 6), 70, 100,"img/aliens.png");
+        playerState = State.Idle;
         movementAction = "";
         specialAction = "";
+        grounded = false;
+        //initialize
     }
 
     public static void update(float deltaTime) {
@@ -43,10 +52,45 @@ public class PlayerController {
 
         if(movementAction.equalsIgnoreCase("right")){
           player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
+            player.direction = "right";
         }
         else if(movementAction.equalsIgnoreCase("left")) {
             player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
+            player.direction = "left";
         }
+        if(Math.abs(velocity.x) > 0){
+            playerState = State.Walk;
+        }
+        else {
+            playerState = State.Idle;
+        }
+        setCurrentAnimation();
 
     }
-}
+    private static void setCurrentAnimation(){
+        if(player.direction.equals("right")){
+            setRightAnimation();
+        }
+        else if(player.direction.equals("left")){
+            setLeftAnimation();
+
+        }
+    }
+    private static void setLeftAnimation(){
+        if(playerState == State.Walk){
+            player.currentAnimation = "walkLeft";
+        }
+        else if(playerState == State.Idle) {
+            player.currentAnimation = "idleLeft";
+        }
+    }
+    private static void setRightAnimation(){
+        if(playerState == State.Walk){
+            player.currentAnimation = "walkRight";
+        }
+        else if(playerState == State.Idle) {
+            player.currentAnimation = "idleRight";
+        }
+    }
+
+    }

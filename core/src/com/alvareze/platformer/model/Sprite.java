@@ -16,6 +16,7 @@ public class Sprite {
     public float height;
     public Spritesheet spriteSheet;
     public String currentAnimation;
+    public String direction;
 
     protected float stateTime;
     //the game time of the player, when he spawns
@@ -29,8 +30,8 @@ public class Sprite {
         this.height = height * LevelController.UNIT_SCALE;
         spriteSheet = new Spritesheet(sheetPath ,width, height);
         animations = new HashMap<String, Animation>();
-
         stateTime = 0f;
+        direction = "right";
 
     }
     public void draw(Batch spriteBatch){
@@ -38,7 +39,6 @@ public class Sprite {
         //size and position of the player & gets him to walk
     }
     public void update(float deltaTime){
-
         //delta time determines the change in time
         stateTime += deltaTime;
     }
