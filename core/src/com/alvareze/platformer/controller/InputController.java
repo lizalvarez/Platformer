@@ -14,14 +14,19 @@ import java.util.ArrayList;
 public class InputController {
     private static ArrayList<InputControl> inputControls;
     private static Spritesheet spritesheet;
+    private static InputControl left;
     private static InputControl right;
 
 
     public static void initializeController(){
         inputControls = new ArrayList<InputControl>();
         spritesheet = new Spritesheet("img/touch-controls.png", 80, 80);
-        right = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[1], "right");
+        left = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[0], "left");
+        right = new InputControl(new Vector2(3, 0), spritesheet.spriteFrames[1], "right");
         inputControls.add(right);
+        inputControls.add(left);
+        //creating an array where we store the input controls
+
         //creating an array for input controls
         Gdx.input.setInputProcessor(createInputAdapter());
     }
