@@ -69,6 +69,11 @@ public class InputController {
                             PlayerController.movementAction = "right";
                         }
                         }
+                    if (input.getBoundingBox().contains(screenX, screenY)) {
+                        if(input.action.equalsIgnoreCase("left")) {
+                            PlayerController.movementAction = "left";
+                        }
+                    }
                 }
                 return true;
             }
@@ -79,6 +84,10 @@ public class InputController {
                 for(InputControl input : inputControls) {
                     if (input.getBoundingBox().contains(screenX, screenY)) {
                         if(input.action.equalsIgnoreCase("right")) {
+                            //checking if we let go of that button
+                            PlayerController.movementAction = "";
+                        }
+                        if(input.action.equalsIgnoreCase("left")) {
                             //checking if we let go of that button
                             PlayerController.movementAction = "";
                         }

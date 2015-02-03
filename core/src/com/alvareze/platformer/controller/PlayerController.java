@@ -51,7 +51,7 @@ public class PlayerController {
         }
 
         if(movementAction.equalsIgnoreCase("right")){
-          player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
+            player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
             player.direction = "right";
         }
         else if(movementAction.equalsIgnoreCase("left")) {
@@ -59,6 +59,12 @@ public class PlayerController {
             player.direction = "left";
         }
         if(Math.abs(velocity.x) > 0){
+            playerState = State.Walk;
+        }
+        else {
+            playerState = State.Idle;
+        }
+        if(Math.abs(velocity.y) > 0){
             playerState = State.Walk;
         }
         else {
