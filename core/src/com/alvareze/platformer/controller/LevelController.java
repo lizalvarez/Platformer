@@ -1,6 +1,7 @@
 package com.alvareze.platformer.controller;
 
 import com.alvareze.platformer.model.Bodies;
+import com.alvareze.platformer.model.CollisionListener;
 import com.alvareze.platformer.model.Level;
 import com.alvareze.platformer.model.Player;
 import com.alvareze.platformer.model.Sprite;
@@ -35,6 +36,7 @@ public class LevelController {
         level = new Level("map/map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
         gameWorld = new World(new Vector2(0,-10), true);
+        gameWorld.setContactListener(new CollisionListener());
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 

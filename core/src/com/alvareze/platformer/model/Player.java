@@ -5,6 +5,7 @@ import com.alvareze.platformer.view.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.HashMap;
+
+import sun.management.Sensor;
 
 public class Player extends Sprite {
 
@@ -31,10 +34,22 @@ public class Player extends Sprite {
         PolygonShape rectangleShape = new PolygonShape();
         rectangleShape.setAsBox(this.width / 2f, this.height / 2f, new Vector2(this.width / 2f, this.height / 2f), 0f );
         //creating shape
+
+        PolygonShape sensorShape = new PolygonShape();
+        sensorShape.setAsBox(this.width / 2.2f, this.height / 32 , new Vector2(this.width / 2, 0), 0f);
+
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
 
+        FixtureDef fixtureDefinitionSensor = new FixtureDef();
+        fixtureDefinitionSensor.shape = sensorShape;
+        fixtureDefinitionSensor.isSensor = true;
+
+
         physicsBody.createFixture(fixtureDefinition);
+        physicsBody.createFixture(fixtureDefinitionSensor);
+        sensorShape.dispose();
+
         rectangleShape.dispose();
 
 //don't flip: stand, climb. need to be flipped: duck, hurt, idle, jump, swim, walk
