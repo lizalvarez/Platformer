@@ -45,7 +45,7 @@ public class PlayerController {
         //a point in space that has direction and magnitude
         Vector2 position = player.physicsBody.getPosition();
 
-        if(velocity.x > MAX_VELOCITY) {
+        if(Math.abs(velocity.x) > MAX_VELOCITY) {
             velocity.x = Math.signum(velocity.x) * MAX_VELOCITY;
             player.physicsBody.setLinearVelocity(velocity.x, velocity.y);
         }
@@ -58,18 +58,21 @@ public class PlayerController {
             player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
             player.direction = "left";
         }
+        else if(movementAction.equalsIgnoreCase("jump")) {
+            player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
+            player.direction = "jump";
+        }
         if(Math.abs(velocity.x) > 0){
             playerState = State.Walk;
         }
         else {
             playerState = State.Idle;
         }
+
         if(Math.abs(velocity.y) > 0){
-            playerState = State.Walk;
+            playerState = State.Jump;
         }
-        else {
-            playerState = State.Idle;
-        }
+
         setCurrentAnimation();
 
     }

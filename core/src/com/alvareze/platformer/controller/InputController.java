@@ -16,15 +16,18 @@ public class InputController {
     private static Spritesheet spritesheet;
     private static InputControl left;
     private static InputControl right;
+    private static InputControl jump;
 
 
     public static void initializeController(){
         inputControls = new ArrayList<InputControl>();
         spritesheet = new Spritesheet("img/touch-controls.png", 80, 80);
         left = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[0], "left");
-        right = new InputControl(new Vector2(3, 0), spritesheet.spriteFrames[1], "right");
+        right = new InputControl(new Vector2(2.5f, 0), spritesheet.spriteFrames[1], "right");
+        jump = new InputControl(new Vector2(4.5f, 0), spritesheet.spriteFrames[2], "jump");
         inputControls.add(right);
         inputControls.add(left);
+        inputControls.add(jump);
         //creating an array where we store the input controls
 
         //creating an array for input controls
