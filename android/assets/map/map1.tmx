@@ -9,7 +9,7 @@
   </data>
  </layer>
  <objectgroup color="#ff0000" name="collision" width="20" height="10">
-  <object name="ground" type="ground" x="4" y="626">
+  <object name="ground" type="ground" x="0" y="630">
    <polyline points="0,0 134,0 136,-64 622,-66 624,-4 1396,0 1398,-628 -4,-626 -4,4 66,4 136,4 136,-66"/>
   </object>
  </objectgroup>

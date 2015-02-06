@@ -58,8 +58,8 @@ public class PlayerController {
             player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
             player.direction = "left";
         }
-        else if(movementAction.equalsIgnoreCase("jump")) {
-            player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
+        else if(specialAction.equalsIgnoreCase("jump")) {
+            player.physicsBody.applyLinearImpulse(0f, VELOCITY, position.x, position.y, true);
             player.direction = "jump";
         }
         if(Math.abs(velocity.x) > 0){

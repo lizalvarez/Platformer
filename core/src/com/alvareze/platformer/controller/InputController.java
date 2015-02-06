@@ -77,6 +77,11 @@ public class InputController {
                             PlayerController.movementAction = "left";
                         }
                     }
+                    if (input.getBoundingBox().contains(screenX, screenY)) {
+                        if(input.action.equalsIgnoreCase("jump")) {
+                            PlayerController.specialAction = "jump";
+                        }
+                    }
                 }
                 return true;
             }
@@ -93,6 +98,10 @@ public class InputController {
                         if(input.action.equalsIgnoreCase("left")) {
                             //checking if we let go of that button
                             PlayerController.movementAction = "";
+                        }
+                        if(input.action.equalsIgnoreCase("jump")) {
+                            //checking if we let go of that button
+                            PlayerController.specialAction = "";
                         }
                     }
                 }
