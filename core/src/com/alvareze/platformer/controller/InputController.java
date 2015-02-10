@@ -48,7 +48,9 @@ public class InputController {
             public boolean keyDown(int keycode) {
                 if(keycode == Input.Keys.RIGHT){
                     PlayerController.movementAction = "right";
-
+                }
+                else if (keycode == Input.Keys.LEFT){
+                    PlayerController.movementAction = "left";
                 }
                return true;
             }
@@ -60,9 +62,13 @@ public class InputController {
                     //clear the action
 
                 }
+                else if(keycode == Input.Keys.LEFT){
+                    PlayerController.movementAction = "";
+                    //clear the action
+
+                }
                 return true;
             }
-
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 screenY = Gdx.graphics.getHeight() - screenY;
