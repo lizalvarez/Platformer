@@ -52,6 +52,10 @@ public class InputController {
                 else if (keycode == Input.Keys.LEFT){
                     PlayerController.movementAction = "left";
                 }
+                else if (keycode == Input.Keys.UP){
+                    PlayerController.specialAction = "jump";
+                }
+
                return true;
             }
 
@@ -65,7 +69,9 @@ public class InputController {
                 else if(keycode == Input.Keys.LEFT){
                     PlayerController.movementAction = "";
                     //clear the action
-
+                }
+                else if (keycode == Input.Keys.UP){
+                    PlayerController.specialAction = "";
                 }
                 return true;
             }

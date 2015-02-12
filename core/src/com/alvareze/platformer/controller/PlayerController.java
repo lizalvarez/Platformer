@@ -69,7 +69,7 @@ public class PlayerController {
             playerState = State.Idle;
         }
 
-        if(Math.abs(velocity.y) > 0){
+       if(Math.abs(velocity.y) > 0){
             playerState = State.Jump;
         }
 
