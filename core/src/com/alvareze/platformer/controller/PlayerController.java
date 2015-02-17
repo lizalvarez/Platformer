@@ -35,6 +35,7 @@ public class PlayerController {
 
     public static void update(float deltaTime) {
         handleInput();
+
         player.update(deltaTime);
     }
     public static void draw(Batch spriteBatch){
@@ -62,6 +63,10 @@ public class PlayerController {
             player.physicsBody.applyLinearImpulse(0f, VELOCITY, position.x, position.y, true);
             player.direction = "jump";
         }
+        else if(specialAction.equalsIgnoreCase("duck")) {
+            player.physicsBody.applyLinearImpulse(0f, VELOCITY, position.x, position.y, true);
+            player.direction = "duck";
+        }
         if(Math.abs(velocity.x) > 0){
             playerState = State.Walk;
         }
@@ -71,6 +76,9 @@ public class PlayerController {
 
        if(Math.abs(velocity.y) > 0){
             playerState = State.Jump;
+        }
+        if(Math.abs(velocity.y) > 0){
+            playerState = State.Duck;
         }
 
         setCurrentAnimation();

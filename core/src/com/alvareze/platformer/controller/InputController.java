@@ -17,6 +17,7 @@ public class InputController {
     private static InputControl left;
     private static InputControl right;
     private static InputControl jump;
+    private static InputControl duck;
 
 
     public static void initializeController(){
@@ -24,10 +25,12 @@ public class InputController {
         spritesheet = new Spritesheet("img/touch-controls.png", 80, 80);
         left = new InputControl(new Vector2(0, 0), spritesheet.spriteFrames[0], "left");
         right = new InputControl(new Vector2(2.5f, 0), spritesheet.spriteFrames[1], "right");
-        jump = new InputControl(new Vector2(4.5f, 0), spritesheet.spriteFrames[2], "jump");
+        jump = new InputControl(new Vector2(4.5f, 1.5f), spritesheet.spriteFrames[2], "jump");
+        duck = new InputControl(new Vector2(4.5f, 0), spritesheet.spriteFrames[3], "duck");
         inputControls.add(right);
         inputControls.add(left);
         inputControls.add(jump);
+        inputControls.add(duck);
         //creating an array where we store the input controls
 
         //creating an array for input controls
@@ -55,8 +58,10 @@ public class InputController {
                 else if (keycode == Input.Keys.UP){
                     PlayerController.specialAction = "jump";
                 }
-
-               return true;
+                else if (keycode == Input.Keys.DOWN){
+                    PlayerController.specialAction = "down";
+                }
+                return true;
             }
 
             @Override
@@ -64,7 +69,6 @@ public class InputController {
                 if(keycode == Input.Keys.RIGHT){
                     PlayerController.movementAction = "";
                     //clear the action
-
                 }
                 else if(keycode == Input.Keys.LEFT){
                     PlayerController.movementAction = "";
@@ -72,6 +76,9 @@ public class InputController {
                 }
                 else if (keycode == Input.Keys.UP){
                     PlayerController.specialAction = "";
+                }
+                else if (keycode == Input.Keys.DOWN){
+                    PlayerController.movementAction = "";
                 }
                 return true;
             }
@@ -92,6 +99,11 @@ public class InputController {
                     if (input.getBoundingBox().contains(screenX, screenY)) {
                         if(input.action.equalsIgnoreCase("jump")) {
                             PlayerController.specialAction = "jump";
+                        }
+                    }
+                    else if (input.getBoundingBox().contains(screenX, screenY)) {
+                        if(input.action.equalsIgnoreCase("duck")) {
+                            PlayerController.movementAction = "duck";
                         }
                     }
                 }
@@ -115,11 +127,14 @@ public class InputController {
                             //checking if we let go of that button
                             PlayerController.specialAction = "";
                         }
+                        if(input.action.equalsIgnoreCase("duck")) {
+                            //checking if we let go of that button
+                            PlayerController.movementAction = "";
+                        }
                     }
                 }
                 return true;
             }
         };
     }
-
 }
