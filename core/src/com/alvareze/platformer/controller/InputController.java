@@ -59,7 +59,7 @@ public class InputController {
                     PlayerController.specialAction = "jump";
                 }
                 else if (keycode == Input.Keys.DOWN){
-                    PlayerController.specialAction = "down";
+                    PlayerController.movementAction = "down";
                 }
                 return true;
             }

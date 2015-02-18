@@ -61,24 +61,20 @@ public class PlayerController {
         }
         else if(specialAction.equalsIgnoreCase("jump")) {
             player.physicsBody.applyLinearImpulse(0f, VELOCITY, position.x, position.y, true);
-            player.direction = "jump";
         }
-        else if(specialAction.equalsIgnoreCase("duck")) {
-            player.physicsBody.applyLinearImpulse(0f, VELOCITY, position.x, position.y, true);
-            player.direction = "duck";
+
+        if(movementAction.equalsIgnoreCase("duck")) {
+            playerState = State.Duck;
         }
-        if(Math.abs(velocity.x) > 0){
+        else if(Math.abs(velocity.x) > 0){
             playerState = State.Walk;
         }
         else {
             playerState = State.Idle;
         }
 
-       if(Math.abs(velocity.y) > 0){
-            playerState = State.Jump;
-        }
         if(Math.abs(velocity.y) > 0){
-            playerState = State.Duck;
+            playerState = State.Jump;
         }
 
         setCurrentAnimation();
@@ -100,6 +96,12 @@ public class PlayerController {
         else if(playerState == State.Idle) {
             player.currentAnimation = "idleLeft";
         }
+        else if(playerState == State.Duck) {
+            player.currentAnimation = "duckLeft";
+        }
+        else if(playerState == State.Jump) {
+            player.currentAnimation = "jumpLeft";
+        }
     }
     private static void setRightAnimation(){
         if(playerState == State.Walk){
@@ -108,6 +110,11 @@ public class PlayerController {
         else if(playerState == State.Idle) {
             player.currentAnimation = "idleRight";
         }
+        else if(playerState == State.Duck) {
+            player.currentAnimation = "duckRight";
+        }
+        else if(playerState == State.Jump) {
+            player.currentAnimation = "jumpRight";
+        }
     }
-
-    }
+}
